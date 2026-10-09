@@ -1040,7 +1040,7 @@ const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(innerW
 composer.setPixelRatio(pixelRatio);
 composer.setSize(innerWidth, innerHeight);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.7, 0.7, 0.9);
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.7, 0.7, 1.0);
 composer.addPass(bloom);
 const finalPass = new ShaderPass({
   uniforms: {
@@ -1101,38 +1101,38 @@ const GOLDEN_SUN = new THREE.Vector3(0.0, TREE_BASE.y + 2.6, TREE_Z - 1).sub(CAM
 const PRESETS = {
   night: {
     sunDir: MOON_DIR,
-    zenith: ['#251d4c'], skyMid: ['#56468c'], horizon: ['#ad93cc'], sunGlow: ['#b8a2ff', 0.3],
-    disc: ['#fff5e4', 4.2], halo: ['#cbb6ff', 0.55], discSize: 0.06, moonness: 1,
+    zenith: ['#1f1844'], skyMid: ['#4d3e82'], horizon: ['#9c82bf'], sunGlow: ['#b8a2ff', 0.18],
+    disc: ['#fff5e4', 3.6], halo: ['#cbb6ff', 0.38], discSize: 0.052, moonness: 1,
     lightColor: ['#aab4ff', 0.55], ambSky: ['#8e98d4', 0.62], ambGround: ['#262a48', 0.6],
-    grassBase: ['#03181a'], grassMid: ['#0b4a43'], grassMid2: ['#11604c'], grassTip: ['#48b394'],
+    grassBase: ['#021214'], grassMid: ['#08332f'], grassMid2: ['#0c4a3a'], grassTip: ['#2f8a72'],
     trans: ['#6fd6c0', 0.1], sheen: ['#cfe4ff', 0.4], flowerGlow: 0.45,
-    treeShadow: ['#151a2e'], treeLit: ['#2a3150'], trunk: ['#100d1a'], rim: ['#b9a2ff', 0.45],
-    cloudLit: ['#c8a6d6'], cloudShadow: ['#6b5491'], cloudOpacity: 0.78, cloudCover: 0.44,
-    stars: 1, fireflies: 1, fogDensity: 0.0105, mist: 0.12, bloom: 0.75, exposure: 1.12, wind: 1.0,
+    treeShadow: ['#0d0f1e'], treeLit: ['#1d2140'], trunk: ['#0a0812'], rim: ['#b9a2ff', 0.3],
+    cloudLit: ['#b896c8'], cloudShadow: ['#5a4580'], cloudOpacity: 0.72, cloudCover: 0.44,
+    stars: 1, fireflies: 1, fogDensity: 0.0078, mist: 0.08, bloom: 0.7, exposure: 1.05, wind: 1.0,
     tint: ['#2b1d55'],
   },
   morning: {
     sunDir: MORNING_SUN,
-    zenith: ['#77a9e3'], skyMid: ['#b3d0f1'], horizon: ['#fcdcc6'], sunGlow: ['#ffd9b4', 0.75],
-    disc: ['#fff7e6', 8.5], halo: ['#ffe4c4', 0.55], discSize: 0.042, moonness: 0,
-    lightColor: ['#fff0da', 1.55], ambSky: ['#b8d0f0', 0.7], ambGround: ['#5b6a48', 0.55],
-    grassBase: ['#183d12'], grassMid: ['#4a9529'], grassMid2: ['#69ab34'], grassTip: ['#c4e77c'],
+    zenith: ['#6a9fdc'], skyMid: ['#a9c9ee'], horizon: ['#f8d4bd'], sunGlow: ['#ffd9b4', 0.4],
+    disc: ['#fff7e6', 5.0], halo: ['#ffe4c4', 0.3], discSize: 0.04, moonness: 0,
+    lightColor: ['#fff0da', 1.3], ambSky: ['#b8d0f0', 0.6], ambGround: ['#5b6a48', 0.55],
+    grassBase: ['#10300c'], grassMid: ['#3a8022'], grassMid2: ['#58992c'], grassTip: ['#b0da6a'],
     trans: ['#dcff8e', 0.35], sheen: ['#fffbea', 0.3], flowerGlow: 0.0,
     treeShadow: ['#2c5532'], treeLit: ['#8cc35a'], trunk: ['#4a3a32'], rim: ['#fff2d6', 0.35],
     cloudLit: ['#ffffff'], cloudShadow: ['#cbd3ec'], cloudOpacity: 0.72, cloudCover: 0.5,
-    stars: 0, fireflies: 0, fogDensity: 0.0125, mist: 0.75, bloom: 0.42, exposure: 1.0, wind: 1.0,
+    stars: 0, fireflies: 0, fogDensity: 0.0085, mist: 0.32, bloom: 0.32, exposure: 0.95, wind: 1.0,
     tint: ['#3a4a7a'],
   },
   golden: {
     sunDir: GOLDEN_SUN,
-    zenith: ['#8c70b2'], skyMid: ['#ec9b92'], horizon: ['#ffd197'], sunGlow: ['#ffb06e', 1.15],
-    disc: ['#fff1c8', 11], halo: ['#ffc17a', 1.0], discSize: 0.046, moonness: 0,
-    lightColor: ['#ffb46e', 1.6], ambSky: ['#e7a2a6', 0.58], ambGround: ['#4d3030', 0.55],
-    grassBase: ['#262710'], grassMid: ['#5c6a1f'], grassMid2: ['#7c7426'], grassTip: ['#ffbd58'],
-    trans: ['#ffa83c', 0.75], sheen: ['#ffe2aa', 0.45], flowerGlow: 0.0,
+    zenith: ['#7f64a8'], skyMid: ['#e08b88'], horizon: ['#ffc287'], sunGlow: ['#ffa860', 0.5],
+    disc: ['#fff1c8', 5.0], halo: ['#ffb870', 0.42], discSize: 0.042, moonness: 0,
+    lightColor: ['#ffb46e', 1.15], ambSky: ['#d897a0', 0.5], ambGround: ['#4d3030', 0.55],
+    grassBase: ['#161a0a'], grassMid: ['#3e5418'], grassMid2: ['#5a5e1e'], grassTip: ['#e8a548'],
+    trans: ['#ffa03a', 0.5], sheen: ['#ffe2aa', 0.45], flowerGlow: 0.0,
     treeShadow: ['#2b2030'], treeLit: ['#7d5f3c'], trunk: ['#1d1418'], rim: ['#ffcf7c', 1.7],
     cloudLit: ['#ffd4a8'], cloudShadow: ['#c46f8d'], cloudOpacity: 0.8, cloudCover: 0.46,
-    stars: 0.04, fireflies: 0, fogDensity: 0.0115, mist: 0.3, bloom: 0.72, exposure: 1.0, wind: 1.0,
+    stars: 0.04, fireflies: 0, fogDensity: 0.0085, mist: 0.18, bloom: 0.55, exposure: 0.95, wind: 1.0,
     tint: ['#4a2240'],
   },
 };
