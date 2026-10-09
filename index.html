@@ -646,8 +646,9 @@ const grassMat = new THREE.ShaderMaterial({
       vec3 c = col * (amb + uLightColor * diff) * ao;
       float sc = pow(max(dot(-V, L), 0.0), 4.0);
       c += uTrans * sc * smoothstep(0.35, 1.0, t) * (0.55 + 0.9 * pn) * (0.7 + 0.6 * vRand);
-      vec3 Hh = normalize(L + V);
-      c += uSheen * pow(max(dot(N, Hh), 0.0), 18.0) * smoothstep(0.45, 1.0, t) * (0.6 + 0.8 * vWave);
+      vec3 Hh = normalize(L + V + vec3(0.0, 0.05, 0.0));
+      float facing = 1.0 - smoothstep(0.2, 0.85, dot(-V, L));   // half-vector degenerates when backlit
+      c += uSheen * pow(max(dot(N, Hh), 0.0), 18.0) * smoothstep(0.45, 1.0, t) * (0.6 + 0.8 * vWave) * facing;
       c *= 1.0 + 0.16 * vWave * t;
       c += uGlowColor * vGlow * (0.12 + 1.35 * t * t);
       gl_FragColor = vec4(applyFog(c, vWorld), 1.0);
@@ -1127,12 +1128,12 @@ const PRESETS = {
     sunDir: GOLDEN_SUN,
     zenith: ['#7f64a8'], skyMid: ['#e08b88'], horizon: ['#ffc287'], sunGlow: ['#ffa860', 0.5],
     disc: ['#fff1c8', 5.0], halo: ['#ffb870', 0.42], discSize: 0.042, moonness: 0,
-    lightColor: ['#ffb46e', 1.15], ambSky: ['#d897a0', 0.5], ambGround: ['#4d3030', 0.55],
-    grassBase: ['#161a0a'], grassMid: ['#3e5418'], grassMid2: ['#5a5e1e'], grassTip: ['#e8a548'],
-    trans: ['#ffa03a', 0.5], sheen: ['#ffe2aa', 0.45], flowerGlow: 0.0,
-    treeShadow: ['#2b2030'], treeLit: ['#7d5f3c'], trunk: ['#1d1418'], rim: ['#ffcf7c', 1.7],
+    lightColor: ['#ffd2a0', 0.95], ambSky: ['#b8a8c4', 0.55], ambGround: ['#3e3a38', 0.55],
+    grassBase: ['#0a1608'], grassMid: ['#2a5a1c'], grassMid2: ['#3c6620'], grassTip: ['#8c8a3a'],
+    trans: ['#ffa040', 0.4], sheen: ['#ffe2aa', 0.45], flowerGlow: 0.0,
+    treeShadow: ['#1c1a26'], treeLit: ['#3e4a2c'], trunk: ['#1d1418'], rim: ['#ffcf7c', 0.9],
     cloudLit: ['#ffd4a8'], cloudShadow: ['#c46f8d'], cloudOpacity: 0.8, cloudCover: 0.46,
-    stars: 0.04, fireflies: 0, fogDensity: 0.0085, mist: 0.18, bloom: 0.55, exposure: 0.95, wind: 1.0,
+    stars: 0.04, fireflies: 0, fogDensity: 0.0072, mist: 0.15, bloom: 0.55, exposure: 0.92, wind: 1.0,
     tint: ['#4a2240'],
   },
 };
